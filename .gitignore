@@ -4,12 +4,9 @@
 .DS_Store
 
 # Created by Builder
-examples/build
 test/build
 weex_tmp
 coverage
-dist
-
 # Node
 logs
 *.log
