@@ -141,6 +141,10 @@
     font-size: 0.4rem;
 }
 
+.weex-picker-body li.active {
+    color: darkred;
+}
+
 
 
 .weex-picker-content .weex-picker-bar{

@@ -162,10 +162,59 @@ Picker.prototype = {
         self.itemScrolls.push(itemScroll)
 
         itemScroll.on('scrollEnd', function () {
+          self._nohightLight(self.pickerScrollers[i])
           const yIndex = Math.abs(Math.round(-1 * this.y / self.itemHeight))
           self.resultIndexs[index] = yIndex
+          self._hightLight(self.pickerScrollers[i], yIndex)
         })
+
+        itemScroll.on('scroll', function () {
+        })
+
+        itemScroll.on('scrollStart', function () {
+          self._nohightLight(self.pickerScrollers[i])
+        })
+
+        self.pickerScrollers[i].addEventListener('click', function (ev) {
+          const target = ev.target
+          if (target.tagName.toLowerCase() === 'li') {
+            self._goToPage(i, target)
+          }
+        })
+
+        // self.pickerScrollers[i].addEventListener('touchend', function (ev) {
+        //   const target = ev.target
+        //   if (target.tagName.toLowerCase() === 'li') {
+        //     self._goToPage(i, target)
+        //   }
+        // })
       })(i)
+    }
+  },
+
+  _goToPage: function (scrollIndex, li) {
+    const alllist = this.pickerScrollers[scrollIndex].getElementsByTagName('li')
+    for (let i = 2; i < alllist.length - 2; i++) {
+      if (alllist[i] === li) {
+        this.itemScrolls[scrollIndex].goToPage(0, i - 2, 500)
+      }
+    }
+  },
+
+  _hightLight: function (el, index) {
+    const alllist = el.getElementsByTagName('li')
+    for (let i = 2; i < alllist.length - 2; i++) {
+      if (i === index + 2) {
+        alllist[i].className = 'active'
+      }
+    }
+  },
+  _nohightLight: function (el) {
+    const alllist = el.getElementsByTagName('li')
+    for (let i = 0; i < alllist.length; i++) {
+      if (alllist[i].className === 'active') {
+        alllist[i].className = ''
+      }
     }
   },
 
@@ -175,6 +224,7 @@ Picker.prototype = {
     for (let i = 0; i < this.pickerScrollers.length; i++) {
       (function (index) {
         self.itemScrolls[index].goToPage(0, self.resultIndexs[index], 0)
+        self._hightLight(self.pickerScrollers[index], self.resultIndexs[index])
       })(i)
     }
   },
