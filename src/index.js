@@ -21,6 +21,8 @@ const pickerModule = {
     const mask = document.createElement('div')
     mask.className = 'weex-picker-mask'
     const self = this
+    debugger
+    console.log(moment(options.min, 'YYYY-MM-DD').toDate())
     const picker = new Pikaday({
       defaultDate: moment(options.value, 'YYYY-MM-DD').toDate(),
       format: 'YYYY-MM-DD',

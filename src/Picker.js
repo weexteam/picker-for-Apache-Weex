@@ -164,7 +164,6 @@ Picker.prototype = {
         itemScroll.on('scrollEnd', function () {
           const yIndex = Math.abs(Math.round(-1 * this.y / self.itemHeight))
           self.resultIndexs[index] = yIndex
-          console.log(yIndex)
         })
       })(i)
     }

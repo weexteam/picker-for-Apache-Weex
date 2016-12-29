@@ -1,6 +1,6 @@
 {
   "name": "weex-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "weex picker extend",
   "license": "Apache-2.0",
   "author": {
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "iscroll": "^5.2.0",
+    "moment": "^2.17.1",
     "pikaday": "^1.5.1"
   },
   "devDependencies": {
@@ -66,7 +67,6 @@
     "weex-components": "^0.2.0",
     "weex-loader": "^0.3.1",
     "weex-vdom-tester": "^0.1.2",
-    "weex-components": "^0.2.0",
     "weex-vue-loader": "^0.1.1"
   }
 }
