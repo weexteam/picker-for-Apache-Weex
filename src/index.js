@@ -23,6 +23,7 @@ const pickerModule = {
     const self = this
     const picker = new Pikaday({
       defaultDate: moment(options.value, 'YYYY-MM-DD').toDate(),
+      setDefaultDate: moment(options.value, 'YYYY-MM-DD').toDate(),
       format: 'YYYY-MM-DD',
       minDate: moment(options.min, 'YYYY-MM-DD').toDate(),
       maxDate: moment(options.max, 'YYYY-MM-DD').toDate(),
