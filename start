@@ -4,7 +4,7 @@ THIS_DIR=$(dirname "$0")
 pushd "$THIS_DIR"
 
 npm run build
-npm run build:examples
 npm run serve &
+npm run dev:examples
 
 popd

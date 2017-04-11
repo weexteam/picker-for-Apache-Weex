@@ -1,43 +1,54 @@
 # weex-picker
-weex浏览器端picker扩展实现
+weex-picker是一个weex插件，可以通过weexpack快速集成，可以丰富weex功能
 
-## Get Start
-这是一个可选择安装包， 使用之前先要用npm进行安装
+支持的weexpack版本： >= 0.2.0
+支持的WeexSDK版本： >= 0.10.0
 
-```
-$ npm install weex-picker
-```
+# 功能
+
+# 快速使用
+- 通过weexpack初始化一个weex-picker工程
+   ```
+   weex create dev weex-picker
+   ```
+- 添加插件
+  ```
+  weex plugin add weex-picker
+  ```
+
+# 已有工程集成
+## iOS集成插件WeexPicker
+- 命令行集成
+  ```
+  weex plugin add weex-picker
+  ```
+- 手动集成
+  在podfile 中添加
+  ```
+  pod 'WeexPicker'
+  ```
+
+## 安卓集成插件weexpicker
+- 命令行集成
+  ```
+  weex plugin add weex-picker
+  ```
+- 手动集成
+  在相应工程的build.gradle文件的dependencies中添加
+  ```
+  compile '${groupId}:weexpicker:{$version}'
+  ``` 
+  注意：您需要自行指定插件的groupId和version并将构建产物发布到相应的依赖管理仓库内去（例如maven）, 您也可以对插件的name进行自定义，默认将使用插件工程的名称作为name
 
 
-## use weex-picker
-使用require方式
-
-
-```
-// 引入weex框架
-require('weex-html5');
-
-// 引入picker扩展
-require('weex-picker');
-
-// 安装扩展
-weex.install(WeexPicker)
-```
-
-直接通过script引入js
-
-
-```html
-// 引入weex框架
-<script src="./node_modules/weex-html5/dist/weex.js"></script>
-// 引入picker扩展
-<script src="./node_modules/weex-picker/dist/index.js"></script>
-// 安装扩展
-<script>
- weex.install(WeexPicker)
-</script>
-
-```
-
-## DEMO
-  在工作根路径 `node_modules/weex-picker`下,访问`node_modules/weex-picker/examples/index.html` 可以查看demo
+## 浏览器端集成 weex-picker
+- 命令行集成
+  ```
+  npm install  weex-picker
+  ```
+- 手动集成
+  在相应工程的package.json文件的dependencies中添加
+  ```
+  weex-picker:{$version}'
+  ``` 
+  
