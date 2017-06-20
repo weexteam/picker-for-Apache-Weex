@@ -44,7 +44,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -52,9 +52,9 @@
 	App.el = '#root';
 	new Vue(App);
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	
 	/* styles */
@@ -70,7 +70,7 @@
 	  /* cssModules */
 	  null
 	)
-	Component.options.__file = "/Users/zq/workspace/weex-picker/examples/index.vue"
+	Component.options.__file = "/Users/kw/github/weex-picker/examples/index.vue"
 	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 	if (Component.options.functional) {console.error("[vue-loader] index.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -90,9 +90,9 @@
 	module.exports = Component.exports
 
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -116,23 +116,23 @@
 	 module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
 	// imports
 
 
 	// module
-	exports.push([module.id, "\n.container{\n\tflex: 1;\n}\n", ""]);
+	exports.push([module.id, "\n.container {\n\tflex: 1;\n}\n", ""]);
 
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -186,9 +186,9 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 	  MIT License http://www.opensource.org/licenses/mit-license.php
@@ -407,9 +407,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/**
 	 * Translates the list format produced by css-loader into something
@@ -440,9 +440,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = function normalizeComponent (
 	  rawScriptExports,
@@ -493,9 +493,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -512,25 +512,61 @@
 	//
 	//
 	//
+	//
+	//
 
-
-	var plugin = weex.requireModule('weexPicker');
+	var picker = weex.requireModule('picker');
 	module.exports = {
 		data: {
-			value: '',
-			index: 0,
-			txtChange: ''
+			normalpickData: '',
+			pickDateData: '',
+			pickTimeData: ''
 		},
 		methods: {
-			createAction: function createAction() {
-				plugin.show();
+			normalpick: function normalpick() {
+				var self = this;
+				picker.pick({
+					items: [1, 2, 3, 4],
+					height: "500px"
+				}, function (ret) {
+					var result = ret.result;
+					if (result == 'success') {
+						self.normalpickData = ret.data;
+					}
+				});
+			},
+			pickDate: function pickDate(e) {
+				var self = this;
+				picker.pickDate({
+					// 'type':'time',
+					// 'value':'04:50',
+					// 'type':'date',
+					'value': '2016-12-20',
+					'max': '2016-12-30',
+					'min': '2014-12-30'
+				}, function (ret) {
+					var result = ret.result;
+					if (result == 'success') {
+						self.pickDateData = ret.data;
+					}
+				});
+			},
+			pickTime: function pickTime() {
+				var self = this;
+				picker.pickTime({}, function (ret) {
+					console.log(ret);
+					var result = ret.result;
+					if (result == 'success') {
+						self.pickTimeData = ret.data;
+					}
+				});
 			}
 		}
 	};
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
 	  return _c('div', {
@@ -539,7 +575,7 @@
 	    staticStyle: {
 	      "margin-bottom": "20px"
 	    }
-	  }, [_vm._v("weex plugin examples")]), _vm._v(" "), _c('div', {
+	  }, [_vm._v("weex picker examples")]), _vm._v(" "), _c('div', {
 	    staticStyle: {
 	      "margin": "20px",
 	      "padding": "20px",
@@ -547,13 +583,41 @@
 	      "color": "#fff"
 	    },
 	    on: {
-	      "click": _vm.createAction
+	      "click": _vm.normalpick
 	    }
 	  }, [_c('text', {
 	    staticStyle: {
 	      "color": "#fff"
 	    }
-	  }, [_vm._v("hello world")])])])
+	  }, [_vm._v("normalpick" + _vm._s(_vm.normalpickData))])]), _vm._v(" "), _c('div', {
+	    staticStyle: {
+	      "margin": "20px",
+	      "padding": "20px",
+	      "background-color": "#1ba1e2",
+	      "color": "#fff"
+	    },
+	    on: {
+	      "click": _vm.pickDate
+	    }
+	  }, [_c('text', {
+	    staticStyle: {
+	      "color": "#fff"
+	    }
+	  }, [_vm._v("pickDate" + _vm._s(_vm.pickDateData))])]), _vm._v(" "), _c('div', {
+	    staticStyle: {
+	      "margin": "20px",
+	      "padding": "20px",
+	      "background-color": "#1ba1e2",
+	      "color": "#fff"
+	    },
+	    on: {
+	      "click": _vm.pickTime
+	    }
+	  }, [_c('text', {
+	    staticStyle: {
+	      "color": "#fff"
+	    }
+	  }, [_vm._v("pickTime" + _vm._s(_vm.pickTimeData))])])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -563,5 +627,5 @@
 	  }
 	}
 
-/***/ }
+/***/ })
 /******/ ]);

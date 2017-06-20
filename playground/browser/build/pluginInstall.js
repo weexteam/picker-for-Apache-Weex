@@ -44,7 +44,7 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 
@@ -54,19 +54,18 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	console.log(_src2.default);
 	if (window.Weex) {
-	  Weex.install(_src2.default);
+	    Weex.install(_src2.default);
 	} else if (window.weex) {
-	  weex.install(_src2.default);
+	    weex.install(_src2.default);
 	}
 
-/***/ },
+/***/ }),
 /* 1 */,
 /* 2 */,
 /* 3 */,
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -120,7 +119,7 @@
 	};
 
 
-/***/ },
+/***/ }),
 /* 5 */,
 /* 6 */,
 /* 7 */,
@@ -130,12 +129,12 @@
 /* 11 */,
 /* 12 */,
 /* 13 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _Picker = __webpack_require__(14);
@@ -157,71 +156,113 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var pickerModule = {
-	  pick: function pick(options, confirmCallback, cancelCallback) {
-	    var items = options.items;
-	    var index = options.index;
-	    options.data = items;
-	    options.defaultIndexs = index;
-	    options.confirmCallback = confirmCallback;
-	    options.cancelCallback = cancelCallback;
-	    options.sender = this.sender;
+	    pick: function pick(options, confirmCallback, cancelCallback) {
+	        var items = options.items;
+	        var index = options.index;
+	        options.data = items;
+	        options.defaultIndexs = index;
+	        options.confirmCallback = confirmCallback;
+	        options.cancelCallback = cancelCallback;
+	        options.sender = this.sender;
 
-	    new _Picker2.default(options);
-	  },
+	        new _Picker2.default(options);
+	    },
 
-	  pickDate: function pickDate(options, confirmCallback) {
-	    var mask = document.createElement('div');
-	    mask.className = 'weex-picker-mask';
-	    var self = this;
-	    var picker = new _pikaday2.default({
-	      defaultDate: (0, _moment2.default)(options.value, 'YYYY-MM-DD').toDate(),
-	      setDefaultDate: (0, _moment2.default)(options.value, 'YYYY-MM-DD').toDate(),
-	      format: 'YYYY-MM-DD',
-	      minDate: (0, _moment2.default)(options.min, 'YYYY-MM-DD').toDate(),
-	      maxDate: (0, _moment2.default)(options.max, 'YYYY-MM-DD').toDate(),
-	      onSelect: function onSelect(date) {
-	        confirmCallback && self.sender.performCallback(confirmCallback, { result: 'success', data: (0, _moment2.default)(date).format('YYYY-MM-DD') });
-	        picker.destroy();
-	        mask.parentNode.removeChild(mask);
-	      }
-	    });
-	    mask.appendChild(picker.el);
-	    document.body.append(mask);
-	  },
+	    pickDate: function pickDate(options, confirmCallback) {
+	        var mask = document.createElement('div');
+	        mask.className = 'weex-picker-mask';
+	        var self = this;
+	        var i18n = {
+	            previousMonth: 'Previous Month',
+	            nextMonth: 'Next Month',
+	            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+	            weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+	            weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-	  pickTime: function pickTime(options, confirmCallback) {
-	    options.value = options.value, options.confirmCallback = confirmCallback, options.sender = this.sender;
-	    new _TimePicker2.default(options);
-	  }
+	            //options see https://github.com/dbushell/Pikaday#configuration.
+
+	        };var picker = new _pikaday2.default({
+	            field: options.field,
+	            trigger: options.trigger,
+	            bound: options.bound,
+	            ariaLabel: options.ariaLabel,
+	            position: options.position,
+	            reposition: options.reposition,
+	            container: options.container,
+	            formatStrict: options.formatStrict,
+	            toString: options.toString,
+	            parse: options.parse,
+	            firstDay: options.firstDay || null,
+	            disableWeekends: options.disableWeekends || false,
+	            disableDayFn: options.disableDayFn,
+	            yearRange: options.yearRange || [1900, 2050],
+	            showWeekNumber: options.showWeekNumber || false,
+	            pickWholeWeek: options.pickWholeWeek || false,
+	            isRTL: options.isRTL,
+	            i18n: options.i18n || i18n,
+	            yearSuffix: options.yearSuffix || '',
+	            showMonthAfterYear: options.showMonthAfterYear,
+	            showDaysInNextAndPreviousMonths: options.showDaysInNextAndPreviousMonths,
+	            enableSelectionDaysInNextAndPreviousMonths: options.enableSelectionDaysInNextAndPreviousMonths,
+	            numberOfMonths: options.numberOfMonths,
+	            mainCalendar: options.mainCalendar,
+	            events: options.events || [],
+	            theme: options.theme || null,
+	            blurFieldOnSelect: options.blurFieldOnSelect,
+	            onOpen: options.onOpen,
+	            onClose: options.onClose,
+	            onDraw: options.onDraw,
+	            keyboardInput: options.keyboardInput,
+	            defaultDate: (0, _moment2.default)(options.value, 'YYYY-MM-DD').toDate(),
+	            setDefaultDate: (0, _moment2.default)(options.value, 'YYYY-MM-DD').toDate(),
+	            format: 'YYYY-MM-DD',
+	            minDate: (0, _moment2.default)(options.min, 'YYYY-MM-DD').toDate(),
+	            maxDate: (0, _moment2.default)(options.max, 'YYYY-MM-DD').toDate(),
+	            onSelect: function onSelect(date) {
+	                confirmCallback && self.sender.performCallback(confirmCallback, { result: 'success', data: (0, _moment2.default)(date).format('YYYY-MM-DD') });
+	                picker.destroy();
+	                mask.parentNode.removeChild(mask);
+	            }
+	        });
+	        mask.appendChild(picker.el);
+	        document.body.append(mask);
+	    },
+
+	    pickTime: function pickTime(options, confirmCallback) {
+	        options.value = options.value;
+	        options.confirmCallback = confirmCallback;
+	        options.sender = this.sender;
+	        new _TimePicker2.default(options);
+	    }
 	};
 
 	var meta = {
-	  picker: [{
-	    name: 'pick',
-	    args: ['object', 'function']
-	  }, {
-	    name: 'pickDate',
-	    args: ['object', 'function']
-	  }, {
-	    name: 'pickTime',
-	    args: ['object', 'function']
-	  }]
+	    picker: [{
+	        name: 'pick',
+	        args: ['object', 'function']
+	    }, {
+	        name: 'pickDate',
+	        args: ['object', 'function']
+	    }, {
+	        name: 'pickTime',
+	        args: ['object', 'function']
+	    }]
 	};
 
 	exports.default = {
-	  init: function init(Weex) {
-	    Weex.registerApiModule('picker', pickerModule, meta);
-	  }
+	    init: function init(Weex) {
+	        Weex.registerApiModule('picker', pickerModule, meta);
+	    }
 	};
 
-/***/ },
+/***/ }),
 /* 14 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -246,269 +287,270 @@
 	    pickerScroller = void 0;
 
 	function Picker(configs) {
-	  this.confirmCallback = configs.confirmCallback;
-	  this.cancelCallback = configs.cancelCallback;
-	  this.data = configs.data;
-	  this.column = this._getColumnLength(this.data);
-	  this.sender = configs.sender;
-	  this.pickerScrollers = [];
-	  this.itemScrolls = [];
-	  this.formateResult = configs.formateResult;
-	  this.resultIndexs = configs.defaultIndexs || this._getDefaultIndex();
-	  this.cancelTitle = configs.cancelTitle || "取消";
-	  this.confirmTitle = configs.confirmTitle || "确认";
-	  this.cancelTitleColor = configs.cancelTitleColor || "#333";
-	  this.confirmTitleColor = configs.confirmTitleColor || "#0074d9";
-	  this.height = configs.height || "400";
-	  this.textColor = configs.textColor || "#333";
-	  this.selectionColor = configs.selectionColor || "darkred";
-	  this.configs = configs;
-	  this._init();
+	    this.confirmCallback = configs.confirmCallback;
+	    this.cancelCallback = configs.cancelCallback;
+	    this.data = configs.data;
+	    this.column = this._getColumnLength(this.data);
+	    this.sender = configs.sender;
+	    this.pickerScrollers = [];
+	    this.itemScrolls = [];
+	    this.formateResult = configs.formateResult;
+	    this.resultIndexs = configs.defaultIndexs || this._getDefaultIndex();
+	    this.cancelTitle = configs.cancelTitle || "取消";
+	    this.confirmTitle = configs.confirmTitle || "确认";
+	    this.cancelTitleColor = configs.cancelTitleColor || "#333";
+	    this.confirmTitleColor = configs.confirmTitleColor || "#0074d9";
+	    this.height = configs.height || "450";
+	    this.textColor = configs.textColor || "#333";
+	    this.selectionColor = configs.selectionColor || "darkred";
+	    this.configs = configs;
+	    this._init();
 	}
 
 	Picker.prototype = {
 
-	  _init: function _init() {
-	    this._create();
-	    this._addEvent();
-	    this._createColumn();
-	    this.show();
-	    this._createScroll();
-	    this._initIndex();
-	  },
+	    _init: function _init() {
+	        this._create();
+	        this._addEvent();
+	        this._createColumn();
+	        this.show();
+	        this._createScroll();
+	        this._initIndex();
+	    },
 
-	  _create: function _create() {
-	    if (!modal) {
-	      modal = document.createElement('div');
-	      modal.className = 'weex-picker weex-picker-fixed';
-	      pickerContainer = document.createElement('div');
-	      pickerHeader = document.createElement('div');
-	      pickerBody = document.createElement('div');
+	    _create: function _create() {
+	        if (!modal) {
+	            modal = document.createElement('div');
+	            modal.className = 'weex-picker weex-picker-fixed';
+	            pickerContainer = document.createElement('div');
+	            pickerHeader = document.createElement('div');
+	            pickerBody = document.createElement('div');
 
-	      pickerBar = document.createElement('div');
-	      pickerBar.className = 'weex-picker-bar';
+	            pickerBar = document.createElement('div');
+	            pickerBar.className = 'weex-picker-bar';
 
-	      pickerContainer.className = 'weex-picker-content';
-	      pickerHeader.className = 'weex-picker-header';
-	      pickerBody.className = 'weex-picker-body';
-	      pickerContainer.appendChild(pickerHeader);
-	      pickerContainer.appendChild(pickerBody);
-	      pickerContainer.appendChild(pickerBar);
-	      modal.appendChild(pickerContainer);
-	      document.body.appendChild(modal);
+	            pickerContainer.className = 'weex-picker-content';
+	            pickerHeader.className = 'weex-picker-header';
+	            pickerBody.className = 'weex-picker-body';
+	            pickerContainer.appendChild(pickerHeader);
+	            pickerContainer.appendChild(pickerBody);
+	            pickerContainer.appendChild(pickerBar);
+	            modal.appendChild(pickerContainer);
+	            document.body.appendChild(modal);
+	        }
+
+	        pickerHeader.innerHTML = '';
+	        pickerConfirm = document.createElement('a');
+	        pickerCancel = document.createElement('a');
+	        pickerConfirm.className = 'weex-picker-confirm';
+	        pickerCancel.className = 'weex-picker-cancel';
+	        pickerConfirm.innerText = this.confirmTitle;
+	        pickerCancel.innerText = this.cancelTitle;
+	        pickerCancel.style.color = this.cancelTitleColor;
+	        pickerConfirm.style.color = this.confirmTitleColor;
+
+	        pickerBody.style.height = this.height;
+	        pickerBar.style.height = parseFloat(this.height) / 5 + "px";
+	        pickerBar.style.bottom = parseFloat(this.height) / 5 * 2 + "px";
+	        pickerBar.style.top = "auto";
+	        pickerHeader.appendChild(pickerCancel);
+	        pickerHeader.appendChild(pickerConfirm);
+	    },
+
+	    _getColumnLength: function _getColumnLength(data) {
+	        if (_typeof(data[0]) === 'object') {
+	            return data.length;
+	        } else {
+	            return 1;
+	        }
+	    },
+
+	    _getDefaultIndex: function _getDefaultIndex() {
+	        var result = [];
+	        for (var i = 0; i < this.column; i++) {
+	            result[0] = 0;
+	        }
+	        return result;
+	    },
+
+	    _getCurrentIndex: function _getCurrentIndex() {
+	        if (this.resultIndexs.length === 1) {
+	            return this.resultIndexs[0];
+	        } else {
+	            return this.resultIndexs;
+	        }
+	    },
+
+	    _addEvent: function _addEvent() {
+	        var _this = this;
+
+	        var confirmCallback = function confirmCallback() {
+	            var indexs = _this._getCurrentIndex();
+	            var resultData = _this.formateResult ? _this.formateResult(_this.data, indexs) : indexs;
+	            var result = {
+	                result: 'success',
+	                data: resultData
+	            };
+
+	            _this.confirmCallback && _this.sender.performCallback(_this.confirmCallback, result);
+	            _this.hide();
+	        };
+
+	        var cancelCallback = function cancelCallback() {
+	            _this.cancelCallback && _this.sender.performCallback(_this.cancelCallback);
+	            var indexs = _this._getCurrentIndex();
+	            var resultData = _this.formateResult ? _this.formateResult(_this.data, indexs) : indexs;
+	            var result = {
+	                result: 'cancel',
+	                data: resultData
+	            };
+	            _this.confirmCallback && _this.sender.performCallback(_this.confirmCallback, result);
+	            _this.hide();
+	        };
+
+	        pickerConfirm.addEventListener('click', confirmCallback);
+	        pickerCancel.addEventListener('click', cancelCallback);
+	    },
+
+	    _createColumn: function _createColumn() {
+	        var items = this.data;
+	        pickerBody.innerHTML = '';
+	        if (this.column > 1) {
+	            for (var i = 0; i < items.length; i++) {
+	                this._createItem(items[i]);
+	            }
+	        } else {
+	            this._createItem(items);
+	        }
+	    },
+
+	    _createItem: function _createItem(items) {
+	        pickerScroller = document.createElement('div');
+	        var ui = document.createElement('ul');
+	        for (var i = -2; i < items.length + 2; i++) {
+	            var cell = document.createElement('li');
+	            if (i < 0 || i >= items.length) {
+	                cell.innerText = '';
+	            } else {
+	                cell.innerText = items[i];
+	            }
+	            cell.style.height = parseFloat(this.height) / 5 + "px";
+	            cell.style.lineHeight = parseFloat(this.height) / 5 + "px";
+	            ui.appendChild(cell);
+	        }
+
+	        pickerScroller.className = 'weex-picker-scroller';
+	        pickerScroller.style.height = this.height;
+	        pickerScroller.style.color = this.textColor;
+
+	        pickerScroller.appendChild(ui);
+	        pickerBody.appendChild(pickerScroller);
+	        this.pickerScrollers.push(pickerScroller);
+	    },
+
+	    _createScroll: function _createScroll() {
+	        var self = this;
+
+	        var _loop = function _loop(i) {
+	            (function (index) {
+	                var itemScroll = new _iscroll2.default(self.pickerScrollers[i], {
+	                    snap: 'li',
+	                    mouseWheel: true,
+	                    vScrollbar: false,
+	                    hScrollbar: false,
+	                    hScroll: false
+	                });
+
+	                self.itemScrolls.push(itemScroll);
+
+	                itemScroll.on('scrollEnd', function () {
+	                    self._nohightLight(self.pickerScrollers[i]);
+	                    var yIndex = Math.abs(Math.round(-1 * this.y / self.itemHeight));
+	                    self.resultIndexs[index] = yIndex;
+	                    self._hightLight(self.pickerScrollers[i], yIndex);
+	                });
+
+	                itemScroll.on('scroll', function () {});
+
+	                itemScroll.on('scrollStart', function () {
+	                    self._nohightLight(self.pickerScrollers[i]);
+	                });
+
+	                self.pickerScrollers[i].addEventListener('click', function (ev) {
+	                    var target = ev.target;
+	                    if (target.tagName.toLowerCase() === 'li') {
+	                        self._goToPage(i, target);
+	                    }
+	                });
+
+	                // self.pickerScrollers[i].addEventListener('touchend', function (ev) {
+	                //   const target = ev.target
+	                //   if (target.tagName.toLowerCase() === 'li') {
+	                //     self._goToPage(i, target)
+	                //   }
+	                // })
+	            })(i);
+	        };
+
+	        for (var i = 0; i < this.pickerScrollers.length; i++) {
+	            _loop(i);
+	        }
+	    },
+
+	    _goToPage: function _goToPage(scrollIndex, li) {
+	        var alllist = this.pickerScrollers[scrollIndex].getElementsByTagName('li');
+	        for (var i = 2; i < alllist.length - 2; i++) {
+	            if (alllist[i] === li) {
+	                this.itemScrolls[scrollIndex].goToPage(0, i - 2, 500);
+	            }
+	        }
+	    },
+
+	    _hightLight: function _hightLight(el, index) {
+	        console.log(el, index);
+	        var alllist = el.getElementsByTagName('li');
+	        for (var i = 2; i < alllist.length - 2; i++) {
+	            if (i === index + 2) {
+	                alllist[i].className = 'active';
+	                alllist[i].style.color = this.selectionColor;
+	            }
+	        }
+	    },
+	    _nohightLight: function _nohightLight(el) {
+	        var alllist = el.getElementsByTagName('li');
+	        for (var i = 0; i < alllist.length; i++) {
+	            if (alllist[i].className === 'active') {
+	                alllist[i].className = '';
+	                alllist[i].style.color = "";
+	            }
+	        }
+	    },
+
+	    _initIndex: function _initIndex() {
+	        var self = this;
+	        self.itemHeight = pickerBody.offsetHeight / 5;
+	        for (var i = 0; i < this.pickerScrollers.length; i++) {
+
+	            (function (index) {
+
+	                self.itemScrolls[index].goToPage(0, self.resultIndexs[index], 0);
+	                self._hightLight(self.pickerScrollers[index], self.resultIndexs[index]);
+	            })(i);
+	        }
+	    },
+
+	    show: function show() {
+	        modal.className = 'weex-picker weex-picker-fixed weex-picker-open';
+	    },
+
+	    hide: function hide() {
+	        modal.className = 'weex-picker weex-picker-fixed weex-picker-close';
 	    }
-
-	    pickerHeader.innerHTML = '';
-	    pickerConfirm = document.createElement('a');
-	    pickerCancel = document.createElement('a');
-	    pickerConfirm.className = 'weex-picker-confirm';
-	    pickerCancel.className = 'weex-picker-cancel';
-	    pickerConfirm.innerText = this.confirmTitle;
-	    pickerCancel.innerText = this.cancelTitle;
-	    pickerCancel.style.color = this.cancelTitleColor;
-	    pickerConfirm.style.color = this.confirmTitleColor;
-
-	    pickerBody.style.height = this.height;
-	    pickerBar.style.height = parseFloat(this.height) / 5 + "px";
-	    pickerBar.style.bottom = parseFloat(this.height) / 5 * 2 + "px";
-	    pickerBar.style.top = "auto";
-	    pickerHeader.appendChild(pickerCancel);
-	    pickerHeader.appendChild(pickerConfirm);
-	  },
-
-	  _getColumnLength: function _getColumnLength(data) {
-	    if (_typeof(data[0]) === 'object') {
-	      return data.length;
-	    } else {
-	      return 1;
-	    }
-	  },
-
-	  _getDefaultIndex: function _getDefaultIndex() {
-	    var result = [];
-	    for (var i = 0; i < this.column; i++) {
-	      result[0] = 0;
-	    }
-	    return result;
-	  },
-
-	  _getCurrentIndex: function _getCurrentIndex() {
-	    if (this.resultIndexs.length === 1) {
-	      return this.resultIndexs[0];
-	    } else {
-	      return this.resultIndexs;
-	    }
-	  },
-
-	  _addEvent: function _addEvent() {
-	    var _this = this;
-
-	    var confirmCallback = function confirmCallback() {
-	      var indexs = _this._getCurrentIndex();
-	      var resultData = _this.formateResult ? _this.formateResult(_this.data, indexs) : indexs;
-	      var result = {
-	        result: 'success',
-	        data: resultData
-	      };
-
-	      _this.confirmCallback && _this.sender.performCallback(_this.confirmCallback, result);
-	      _this.hide();
-	    };
-
-	    var cancelCallback = function cancelCallback() {
-	      _this.cancelCallback && _this.sender.performCallback(_this.cancelCallback);
-	      var indexs = _this._getCurrentIndex();
-	      var resultData = _this.formateResult ? _this.formateResult(_this.data, indexs) : indexs;
-	      var result = {
-	        result: 'cancel',
-	        data: resultData
-	      };
-	      _this.confirmCallback && _this.sender.performCallback(_this.confirmCallback, result);
-	      _this.hide();
-	    };
-
-	    pickerConfirm.addEventListener('click', confirmCallback);
-	    pickerCancel.addEventListener('click', cancelCallback);
-	  },
-
-	  _createColumn: function _createColumn() {
-	    var items = this.data;
-	    pickerBody.innerHTML = '';
-	    if (this.column > 1) {
-	      for (var i = 0; i < items.length; i++) {
-	        this._createItem(items[i]);
-	      }
-	    } else {
-	      this._createItem(items);
-	    }
-	  },
-
-	  _createItem: function _createItem(items) {
-	    pickerScroller = document.createElement('div');
-	    var ui = document.createElement('ul');
-	    for (var i = -2; i < items.length + 2; i++) {
-	      var cell = document.createElement('li');
-	      if (i < 0 || i >= items.length) {
-	        cell.innerText = '';
-	      } else {
-	        cell.innerText = items[i];
-	      }
-	      cell.style.height = parseFloat(this.height) / 5 + "px";
-	      cell.style.lineHeight = parseFloat(this.height) / 5 + "px";
-	      ui.appendChild(cell);
-	    }
-
-	    pickerScroller.className = 'weex-picker-scroller';
-	    pickerScroller.style.height = this.height;
-	    pickerScroller.style.color = this.textColor;
-
-	    pickerScroller.appendChild(ui);
-	    pickerBody.appendChild(pickerScroller);
-	    this.pickerScrollers.push(pickerScroller);
-	  },
-
-	  _createScroll: function _createScroll() {
-	    var self = this;
-
-	    var _loop = function _loop(i) {
-	      (function (index) {
-	        var itemScroll = new _iscroll2.default(self.pickerScrollers[i], {
-	          snap: 'li',
-	          mouseWheel: true,
-	          vScrollbar: false,
-	          hScrollbar: false,
-	          hScroll: false
-	        });
-
-	        self.itemScrolls.push(itemScroll);
-
-	        itemScroll.on('scrollEnd', function () {
-	          self._nohightLight(self.pickerScrollers[i]);
-	          var yIndex = Math.abs(Math.round(-1 * this.y / self.itemHeight));
-	          self.resultIndexs[index] = yIndex;
-	          self._hightLight(self.pickerScrollers[i], yIndex);
-	        });
-
-	        itemScroll.on('scroll', function () {});
-
-	        itemScroll.on('scrollStart', function () {
-	          self._nohightLight(self.pickerScrollers[i]);
-	        });
-
-	        self.pickerScrollers[i].addEventListener('click', function (ev) {
-	          var target = ev.target;
-	          if (target.tagName.toLowerCase() === 'li') {
-	            self._goToPage(i, target);
-	          }
-	        });
-
-	        // self.pickerScrollers[i].addEventListener('touchend', function (ev) {
-	        //   const target = ev.target
-	        //   if (target.tagName.toLowerCase() === 'li') {
-	        //     self._goToPage(i, target)
-	        //   }
-	        // })
-	      })(i);
-	    };
-
-	    for (var i = 0; i < this.pickerScrollers.length; i++) {
-	      _loop(i);
-	    }
-	  },
-
-	  _goToPage: function _goToPage(scrollIndex, li) {
-	    var alllist = this.pickerScrollers[scrollIndex].getElementsByTagName('li');
-	    for (var i = 2; i < alllist.length - 2; i++) {
-	      if (alllist[i] === li) {
-	        this.itemScrolls[scrollIndex].goToPage(0, i - 2, 500);
-	      }
-	    }
-	  },
-
-	  _hightLight: function _hightLight(el, index) {
-	    var alllist = el.getElementsByTagName('li');
-	    for (var i = 2; i < alllist.length - 2; i++) {
-	      if (i === index + 2) {
-	        alllist[i].className = 'active';
-	        alllist[i].style.color = this.selectionColor;
-	      }
-	    }
-	  },
-	  _nohightLight: function _nohightLight(el) {
-	    var alllist = el.getElementsByTagName('li');
-	    for (var i = 0; i < alllist.length; i++) {
-	      if (alllist[i].className === 'active') {
-	        alllist[i].className = '';
-	        alllist[i].style.color = "";
-	      }
-	    }
-	  },
-
-	  _initIndex: function _initIndex() {
-	    var self = this;
-	    self.itemHeight = pickerBody.offsetHeight / 5;
-	    for (var i = 0; i < this.pickerScrollers.length; i++) {
-
-	      (function (index) {
-
-	        self.itemScrolls[index].goToPage(0, self.resultIndexs[index], 0);
-	        self._hightLight(self.pickerScrollers[index], self.resultIndexs[index]);
-	      })(i);
-	    }
-	  },
-
-	  show: function show() {
-	    modal.className = 'weex-picker weex-picker-fixed weex-picker-open';
-	  },
-
-	  hide: function hide() {
-	    modal.className = 'weex-picker weex-picker-fixed weex-picker-close';
-	  }
 	};
 
-/***/ },
+/***/ }),
 /* 15 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
@@ -532,9 +574,9 @@
 		module.hot.dispose(function() { update(); });
 	}
 
-/***/ },
+/***/ }),
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(4)();
 	// imports
@@ -546,9 +588,9 @@
 	// exports
 
 
-/***/ },
+/***/ }),
 /* 17 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*
 		MIT License http://www.opensource.org/licenses/mit-license.php
@@ -798,9 +840,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*! iScroll v5.2.0 ~ (c) 2008-2016 Matteo Spinelli ~ http://cubiq.org/license */
 	(function (window, document, Math) {
@@ -2895,9 +2937,9 @@
 	})(window, document, Math);
 
 
-/***/ },
+/***/ }),
 /* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
 	//! version : 2.18.1
@@ -7365,9 +7407,9 @@
 
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(20)(module)))
 
-/***/ },
+/***/ }),
 /* 20 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = function(module) {
 		if(!module.webpackPolyfill) {
@@ -7381,9 +7423,9 @@
 	}
 
 
-/***/ },
+/***/ }),
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
 		"./af": 22,
@@ -7631,9 +7673,9 @@
 	webpackContext.id = 21;
 
 
-/***/ },
+/***/ }),
 /* 22 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Afrikaans [af]
@@ -7709,9 +7751,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic [ar]
@@ -7856,9 +7898,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 24 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic (Algeria) [ar-dz]
@@ -7920,9 +7962,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 25 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic (Kuwait) [ar-kw]
@@ -7984,9 +8026,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 26 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic (Lybia) [ar-ly]
@@ -8115,9 +8157,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 27 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic (Morocco) [ar-ma]
@@ -8180,9 +8222,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 28 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Arabic (Saudi Arabia) [ar-sa]
@@ -8290,9 +8332,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 29 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale  :  Arabic (Tunisia) [ar-tn]
@@ -8354,9 +8396,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 30 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Azerbaijani [az]
@@ -8464,9 +8506,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 31 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Belarusian [be]
@@ -8603,9 +8645,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 32 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Bulgarian [bg]
@@ -8698,9 +8740,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 33 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Bengali [bn]
@@ -8822,9 +8864,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 34 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Tibetan [bo]
@@ -8946,9 +8988,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 35 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Breton [br]
@@ -9059,9 +9101,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 36 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Bosnian [bs]
@@ -9207,9 +9249,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 37 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Catalan [ca]
@@ -9300,9 +9342,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 38 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Czech [cs]
@@ -9477,9 +9519,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 39 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Chuvash [cv]
@@ -9545,9 +9587,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 40 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Welsh [cy]
@@ -9631,9 +9673,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 41 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Danish [da]
@@ -9696,9 +9738,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 42 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : German [de]
@@ -9779,9 +9821,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 43 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : German (Austria) [de-at]
@@ -9863,9 +9905,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 44 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : German (Switzerland) [de-ch]
@@ -9946,9 +9988,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 45 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Maldivian [dv]
@@ -10051,9 +10093,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 46 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Greek [el]
@@ -10156,9 +10198,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 47 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (Australia) [en-au]
@@ -10228,9 +10270,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 48 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (Canada) [en-ca]
@@ -10296,9 +10338,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 49 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (United Kingdom) [en-gb]
@@ -10368,9 +10410,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 50 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (Ireland) [en-ie]
@@ -10440,9 +10482,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 51 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : English (New Zealand) [en-nz]
@@ -10512,9 +10554,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 52 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Esperanto [eo]
@@ -10590,9 +10632,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 53 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish [es]
@@ -10678,9 +10720,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 54 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
@@ -10765,9 +10807,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 55 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Estonian [et]
@@ -10850,9 +10892,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 56 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Basque [eu]
@@ -10921,9 +10963,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 57 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Persian [fa]
@@ -11033,9 +11075,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 58 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Finnish [fi]
@@ -11145,9 +11187,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 59 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Faroese [fo]
@@ -11210,9 +11252,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 60 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : French [fr]
@@ -11298,9 +11340,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 61 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : French (Canada) [fr-ca]
@@ -11377,9 +11419,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 62 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : French (Switzerland) [fr-ch]
@@ -11460,9 +11502,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 63 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Frisian [fy]
@@ -11540,9 +11582,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 64 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Scottish Gaelic [gd]
@@ -11621,9 +11663,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 65 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Galician [gl]
@@ -11703,9 +11745,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 66 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Konkani Latin script [gom-latn]
@@ -11830,9 +11872,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 67 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Hebrew [he]
@@ -11934,9 +11976,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 68 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Hindi [hi]
@@ -12063,9 +12105,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 69 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Croatian [hr]
@@ -12213,9 +12255,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 70 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Hungarian [hu]
@@ -12327,9 +12369,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 71 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Armenian [hy-am]
@@ -12427,9 +12469,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 72 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Indonesian [id]
@@ -12515,9 +12557,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 73 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Icelandic [is]
@@ -12647,9 +12689,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 74 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Italian [it]
@@ -12722,9 +12764,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 75 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Japanese [ja]
@@ -12807,9 +12849,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 76 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Javanese [jv]
@@ -12895,9 +12937,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 77 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Georgian [ka]
@@ -12989,9 +13031,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 78 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Kazakh [kk]
@@ -13081,9 +13123,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 79 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Cambodian [km]
@@ -13144,9 +13186,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 80 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Kannada [kn]
@@ -13275,9 +13317,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 81 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Korean [ko]
@@ -13349,9 +13391,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 82 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Kyrgyz [ky]
@@ -13442,9 +13484,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 83 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Luxembourgish [lb]
@@ -13584,9 +13626,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 84 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Lao [lo]
@@ -13659,9 +13701,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 85 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Lithuanian [lt]
@@ -13781,9 +13823,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 86 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Latvian [lv]
@@ -13883,9 +13925,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 87 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Montenegrin [me]
@@ -13999,9 +14041,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 88 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Maori [mi]
@@ -14068,9 +14110,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 89 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Macedonian [mk]
@@ -14163,9 +14205,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 90 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Malayalam [ml]
@@ -14249,9 +14291,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 91 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Marathi [mr]
@@ -14413,9 +14455,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 92 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Malay [ms]
@@ -14500,9 +14542,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 93 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Malay [ms-my]
@@ -14588,9 +14630,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 94 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Burmese [my]
@@ -14689,9 +14731,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 95 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Norwegian Bokmål [nb]
@@ -14757,9 +14799,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 96 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Nepalese [ne]
@@ -14885,9 +14927,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 97 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Dutch [nl]
@@ -14978,9 +15020,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 98 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Dutch (Belgium) [nl-be]
@@ -15071,9 +15113,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 99 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Nynorsk [nn]
@@ -15136,9 +15178,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 100 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Punjabi (India) [pa-in]
@@ -15265,9 +15307,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 101 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Polish [pl]
@@ -15377,9 +15419,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 102 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Portuguese [pt]
@@ -15447,9 +15489,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 103 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Portuguese (Brazil) [pt-br]
@@ -15513,9 +15555,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 104 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Romanian [ro]
@@ -15593,9 +15635,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 105 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Russian [ru]
@@ -15781,9 +15823,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 106 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Sindhi [sd]
@@ -15884,9 +15926,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 107 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Northern Sami [se]
@@ -15950,9 +15992,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 108 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Sinhalese [si]
@@ -16026,9 +16068,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 109 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Slovak [sk]
@@ -16181,9 +16223,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 110 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Slovenian [sl]
@@ -16348,9 +16390,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 111 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Albanian [sq]
@@ -16423,9 +16465,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 112 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Serbian [sr]
@@ -16538,9 +16580,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 113 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Serbian Cyrillic [sr-cyrl]
@@ -16653,9 +16695,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 114 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : siSwati [ss]
@@ -16747,9 +16789,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 115 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Swedish [sv]
@@ -16821,9 +16863,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 116 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Swahili [sw]
@@ -16885,9 +16927,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 117 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Tamil [ta]
@@ -17020,9 +17062,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 118 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Telugu [te]
@@ -17114,9 +17156,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 119 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Tetun Dili (East Timor) [tet]
@@ -17187,9 +17229,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 120 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Thai [th]
@@ -17259,9 +17301,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 121 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Tagalog (Philippines) [tl-ph]
@@ -17326,9 +17368,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 122 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Klingon [tlh]
@@ -17451,9 +17493,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 123 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Turkish [tr]
@@ -17546,9 +17588,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 124 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Talossan [tzl]
@@ -17642,9 +17684,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 125 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Central Atlas Tamazight [tzm]
@@ -17705,9 +17747,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 126 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Central Atlas Tamazight Latin [tzm-latn]
@@ -17768,9 +17810,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 127 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Ukrainian [uk]
@@ -17924,9 +17966,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 128 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Urdu [ur]
@@ -18028,9 +18070,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 129 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Uzbek [uz]
@@ -18091,9 +18133,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 130 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Uzbek Latin [uz-latn]
@@ -18154,9 +18196,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 131 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Vietnamese [vi]
@@ -18238,9 +18280,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 132 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Pseudo [x-pseudo]
@@ -18311,9 +18353,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 133 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Yoruba Nigeria [yo]
@@ -18376,9 +18418,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 134 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Chinese (China) [zh-cn]
@@ -18492,9 +18534,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 135 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Chinese (Hong Kong) [zh-hk]
@@ -18602,9 +18644,9 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 136 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Chinese (Taiwan) [zh-tw]
@@ -18711,25 +18753,25 @@
 	})));
 
 
-/***/ },
+/***/ }),
 /* 137 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 
 	exports.default = function (configs) {
-	  var time = (0, _moment2.default)(configs.value || new Date(), 'HH:mm');
-	  var value = getDefaultIndexs(time);
+	    var time = (0, _moment2.default)(configs.value || new Date(), 'HH:mm');
+	    var value = getDefaultIndexs(time);
 
-	  configs.defaultIndexs = value;
-	  configs.formateResult = formateResult;
-	  configs.data = inputData;
+	    configs.defaultIndexs = value;
+	    configs.formateResult = formateResult;
+	    configs.data = inputData;
 
-	  return new _Picker2.default(configs);
+	    return new _Picker2.default(configs);
 	};
 
 	var _Picker = __webpack_require__(14);
@@ -18743,57 +18785,57 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var createData = function createData() {
-	  var hour = [];
-	  var moment = [];
-	  var i = 0;
-	  for (i = 0; i < 24; i++) {
-	    if (i < 10) {
-	      hour.push('0' + i);
-	    } else {
-	      hour.push(i + '');
+	    var hour = [];
+	    var moment = [];
+	    var i = 0;
+	    for (i = 0; i < 24; i++) {
+	        if (i < 10) {
+	            hour.push('0' + i);
+	        } else {
+	            hour.push(i + '');
+	        }
 	    }
-	  }
-	  for (i = 0; i < 60; i++) {
-	    if (i < 10) {
-	      moment.push('0' + i);
-	    } else {
-	      moment.push(i + '');
+	    for (i = 0; i < 60; i++) {
+	        if (i < 10) {
+	            moment.push('0' + i);
+	        } else {
+	            moment.push(i + '');
+	        }
 	    }
-	  }
 
-	  return [hour, moment];
+	    return [hour, moment];
 	};
 
 	var inputData = createData();
 
 	var getDefaultIndexs = function getDefaultIndexs(time) {
-	  var hour = time.format('HH');
-	  var moment = time.format('mm');
-	  var result = [0, 0];
-	  var i = 0;
-	  for (i = 0; i < inputData[0].length; i++) {
-	    if (hour === inputData[0][i]) {
-	      result[0] = i;
+	    var hour = time.format('HH');
+	    var moment = time.format('mm');
+	    var result = [0, 0];
+	    var i = 0;
+	    for (i = 0; i < inputData[0].length; i++) {
+	        if (hour === inputData[0][i]) {
+	            result[0] = i;
+	        }
 	    }
-	  }
-	  for (i = 0; i < inputData[1].length; i++) {
-	    if (moment === inputData[1][i]) {
-	      result[1] = i;
+	    for (i = 0; i < inputData[1].length; i++) {
+	        if (moment === inputData[1][i]) {
+	            result[1] = i;
+	        }
 	    }
-	  }
 
-	  return result;
+	    return result;
 	};
 
 	var formateResult = function formateResult(data, indexs) {
-	  var hour = data[0][indexs[0]];
-	  var moment = data[1][indexs[1]];
-	  return hour + ':' + moment;
+	    var hour = data[0][indexs[0]];
+	    var moment = data[1][indexs[1]];
+	    return hour + ':' + moment;
 	};
 
-/***/ },
+/***/ }),
 /* 138 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	/*!
 	 * Pikaday
@@ -18853,22 +18895,6 @@
 	            el.removeEventListener(e, callback, !!capture);
 	        } else {
 	            el.detachEvent('on' + e, callback);
-	        }
-	    },
-
-	    fireEvent = function(el, eventName, data)
-	    {
-	        var ev;
-
-	        if (document.createEvent) {
-	            ev = document.createEvent('HTMLEvents');
-	            ev.initEvent(eventName, true, false);
-	            ev = extend(ev, data);
-	            el.dispatchEvent(ev);
-	        } else if (document.createEventObject) {
-	            ev = document.createEventObject();
-	            ev = extend(ev, data);
-	            el.fireEvent('on' + eventName, ev);
 	        }
 	    },
 
@@ -18957,6 +18983,22 @@
 	        return to;
 	    },
 
+	    fireEvent = function(el, eventName, data)
+	    {
+	        var ev;
+
+	        if (document.createEvent) {
+	            ev = document.createEvent('HTMLEvents');
+	            ev.initEvent(eventName, true, false);
+	            ev = extend(ev, data);
+	            el.dispatchEvent(ev);
+	        } else if (document.createEventObject) {
+	            ev = document.createEventObject();
+	            ev = extend(ev, data);
+	            el.fireEvent('on' + eventName, ev);
+	        }
+	    },
+
 	    adjustCalendar = function(calendar) {
 	        if (calendar.month < 0) {
 	            calendar.year -= Math.ceil(Math.abs(calendar.month)/12);
@@ -18990,6 +19032,13 @@
 	        // the default output format for `.toString()` and `field` value
 	        format: 'YYYY-MM-DD',
 
+	        // the toString function which gets passed a current date object and format
+	        // and returns a string
+	        toString: null,
+
+	        // used to create date object from current input string
+	        parse: null,
+
 	        // the initial date to view when first opened
 	        defaultDate: null,
 
@@ -19013,6 +19062,9 @@
 	        // show week numbers at head of row
 	        showWeekNumber: false,
 
+	        // Week picker mode
+	        pickWholeWeek: false,
+
 	        // used internally (don't config outside)
 	        minYear: 0,
 	        maxYear: 9999,
@@ -19033,6 +19085,9 @@
 	        // Render days of the calendar grid that fall in the next or previous month
 	        showDaysInNextAndPreviousMonths: false,
 
+	        // Allows user to select days that fall in the next or previous month
+	        enableSelectionDaysInNextAndPreviousMonths: false,
+
 	        // how many months are visible
 	        numberOfMonths: 1,
 
@@ -19042,6 +19097,9 @@
 
 	        // Specify a DOM element to render the calendar in
 	        container: undefined,
+
+	        // Blur field when date is selected
+	        blurFieldOnSelect : true,
 
 	        // internationalization
 	        i18n: {
@@ -19054,6 +19112,9 @@
 
 	        // Theme Classname
 	        theme: null,
+
+	        // events array
+	        events: [],
 
 	        // callback function
 	        onSelect: null,
@@ -19082,6 +19143,11 @@
 	        if (opts.isEmpty) {
 	            if (opts.showDaysInNextAndPreviousMonths) {
 	                arr.push('is-outside-current-month');
+
+	                if(!opts.enableSelectionDaysInNextAndPreviousMonths) {
+	                    arr.push('is-selection-disabled');
+	                }
+
 	            } else {
 	                return '<td class="is-empty"></td>';
 	            }
@@ -19095,6 +19161,9 @@
 	        if (opts.isSelected) {
 	            arr.push('is-selected');
 	            ariaSelected = 'true';
+	        }
+	        if (opts.hasEvent) {
+	            arr.push('has-event');
 	        }
 	        if (opts.isInRange) {
 	            arr.push('is-inrange');
@@ -19120,9 +19189,9 @@
 	        return '<td class="pika-week">' + weekNum + '</td>';
 	    },
 
-	    renderRow = function(days, isRTL)
+	    renderRow = function(days, isRTL, pickWholeWeek, isRowSelected)
 	    {
-	        return '<tr>' + (isRTL ? days.reverse() : days).join('') + '</tr>';
+	        return '<tr class="pika-row' + (pickWholeWeek ? ' pick-whole-week' : '') + (isRowSelected ? ' is-selected' : '') + '">' + (isRTL ? days.reverse() : days).join('') + '</tr>';
 	    },
 
 	    renderBody = function(rows)
@@ -19233,7 +19302,7 @@
 	                    if (opts.bound) {
 	                        sto(function() {
 	                            self.hide();
-	                            if (opts.field) {
+	                            if (opts.blurFieldOnSelect && opts.field) {
 	                                opts.field.blur();
 	                            }
 	                        }, 100);
@@ -19283,7 +19352,9 @@
 	                switch(e.keyCode){
 	                    case 13:
 	                    case 27:
-	                        opts.field.blur();
+	                        if (opts.field) {
+	                            opts.field.blur();
+	                        }
 	                        break;
 	                    case 37:
 	                        e.preventDefault();
@@ -19309,7 +19380,9 @@
 	            if (e.firedBy === self) {
 	                return;
 	            }
-	            if (hasMoment) {
+	            if (opts.parse) {
+	                date = opts.parse(opts.field.value, opts.format);
+	            } else if (hasMoment) {
 	                date = moment(opts.field.value, opts.format, opts.formatStrict);
 	                date = (date && date.isValid()) ? date.toDate() : null;
 	            }
@@ -19499,7 +19572,17 @@
 	         */
 	        toString: function(format)
 	        {
-	            return !isDate(this._d) ? '' : hasMoment ? moment(this._d).format(format || this._o.format) : this._d.toDateString();
+	            format = format || this._o.format;
+	            if (!isDate(this._d)) {
+	                return '';
+	            }
+	            if (this._o.toString) {
+	              return this._o.toString(this._d, format);
+	            }
+	            if (hasMoment) {
+	              return moment(this._d).format(format);
+	            }
+	            return this._d.toDateString();
 	        },
 
 	        /**
@@ -19521,11 +19604,11 @@
 	        },
 
 	        /**
-	         * return a Date object of the current selection with fallback for the current date
+	         * return a Date object of the current selection
 	         */
 	        getDate: function()
 	        {
-	            return isDate(this._d) ? new Date(this._d.getTime()) : new Date();
+	            return isDate(this._d) ? new Date(this._d.getTime()) : null;
 	        },
 
 	        /**
@@ -19608,7 +19691,7 @@
 
 	        adjustDate: function(sign, days) {
 
-	            var day = this.getDate();
+	            var day = this.getDate() || new Date();
 	            var difference = parseInt(days)*24*60*60*1000;
 
 	            var newDay;
@@ -19617,14 +19700,6 @@
 	                newDay = new Date(day.valueOf() + difference);
 	            } else if (sign === 'subtract') {
 	                newDay = new Date(day.valueOf() - difference);
-	            }
-
-	            if (hasMoment) {
-	                if (sign === 'add') {
-	                    newDay = moment(day).add(days, "days").toDate();
-	                } else if (sign === 'subtract') {
-	                    newDay = moment(day).subtract(days, "days").toDate();
-	                }
 	            }
 
 	            this.setDate(newDay);
@@ -19778,7 +19853,7 @@
 	            if (typeof this._o.onDraw === 'function') {
 	                this._o.onDraw(this);
 	            }
-	            
+
 	            if (opts.bound) {
 	                // let the screen reader user know to use arrow keys
 	                opts.field.setAttribute('aria-label', 'Use the arrow keys to pick a date');
@@ -19865,11 +19940,13 @@
 	                after -= 7;
 	            }
 	            cells += 7 - after;
+	            var isWeekSelected = false;
 	            for (var i = 0, r = 0; i < cells; i++)
 	            {
 	                var day = new Date(year, month, 1 + (i - before)),
 	                    isSelected = isDate(this._d) ? compareDates(day, this._d) : false,
 	                    isToday = compareDates(day, now),
+	                    hasEvent = opts.events.indexOf(day.toDateString()) !== -1 ? true : false,
 	                    isEmpty = i < before || i >= (days + before),
 	                    dayNumber = 1 + (i - before),
 	                    monthNumber = month,
@@ -19898,6 +19975,7 @@
 	                        day: dayNumber,
 	                        month: monthNumber,
 	                        year: yearNumber,
+	                        hasEvent: hasEvent,
 	                        isSelected: isSelected,
 	                        isToday: isToday,
 	                        isDisabled: isDisabled,
@@ -19905,8 +19983,13 @@
 	                        isStartRange: isStartRange,
 	                        isEndRange: isEndRange,
 	                        isInRange: isInRange,
-	                        showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths
+	                        showDaysInNextAndPreviousMonths: opts.showDaysInNextAndPreviousMonths,
+	                        enableSelectionDaysInNextAndPreviousMonths: opts.enableSelectionDaysInNextAndPreviousMonths
 	                    };
+
+	                if (opts.pickWholeWeek && isSelected) {
+	                    isWeekSelected = true;
+	                }
 
 	                row.push(renderDay(dayConfig));
 
@@ -19914,9 +19997,10 @@
 	                    if (opts.showWeekNumber) {
 	                        row.unshift(renderWeek(i - before, month, year));
 	                    }
-	                    data.push(renderRow(row, opts.isRTL));
+	                    data.push(renderRow(row, opts.isRTL, opts.pickWholeWeek, isWeekSelected));
 	                    row = [];
 	                    r = 0;
+	                    isWeekSelected = false;
 	                }
 	            }
 	            return renderTable(opts, data, randId);
@@ -19930,9 +20014,9 @@
 	        show: function()
 	        {
 	            if (!this.isVisible()) {
-	                removeClass(this.el, 'is-hidden');
 	                this._v = true;
 	                this.draw();
+	                removeClass(this.el, 'is-hidden');
 	                if (this._o.bound) {
 	                    addEvent(document, 'click', this._onClick);
 	                    this.adjustPosition();
@@ -19970,6 +20054,7 @@
 	            removeEvent(this.el, 'mousedown', this._onMouseDown, true);
 	            removeEvent(this.el, 'touchend', this._onMouseDown, true);
 	            removeEvent(this.el, 'change', this._onChange);
+	            removeEvent(document, 'keydown', this._onKeyChange);
 	            if (this._o.field) {
 	                removeEvent(this._o.field, 'change', this._onInputChange);
 	                if (this._o.bound) {
@@ -19990,5 +20075,5 @@
 	}));
 
 
-/***/ }
+/***/ })
 /******/ ]);
