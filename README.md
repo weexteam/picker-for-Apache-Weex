@@ -3,7 +3,7 @@ weex-picker是一个weex插件，可以通过weexpack快速集成，可以丰富
 
 * 支持的weexpack版本： >= 0.2.0
 * 支持的WeexSDK版本： >= 0.14.0
-* 支持的Vuev版本: 2.x
+* 支持的Vue版本: 2.x
 
 weex-picker仅支持weex的web端的picker功能，如无需picker功能，无需引入.
 
