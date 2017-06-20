@@ -8,12 +8,16 @@ weex-picker是一个weex插件，可以通过weexpack快速集成，可以丰富
 weex-picker仅支持weex的web端的picker功能，如无需picker功能，无需引入.
 
 ## Examples
+
+- 编译例子
 ```
   npm run build:examples:web
-  
+```
+- 启动调试服务器
+```
   npm run serve
 ```
-  打开 [localhost:12580](localhost:12580) 查看例子.
+  打开 [localhost:12580]('localhost:12580/index.html') 查看例子.
 
 ## How to use
 - Step 1
@@ -65,6 +69,6 @@ weex-picker仅支持weex的web端的picker功能，如无需picker功能，无�
 
   - value 默认时间（例：12:00）
 
-##pickDateOptions
+## pickDateOptions
   
   API具体可查看[Pickday Configuration](https://github.com/dbushell/Pikaday#configuration)
