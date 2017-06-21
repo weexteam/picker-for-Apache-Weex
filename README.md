@@ -42,14 +42,14 @@ weex-picker仅支持weex的web端的picker功能，如无需picker功能，无�
 ```javascript
   const picker = weex.requireModule('picker');
   picker.pick({
-			items: [1, 2, 3, 4],
-			height: "500px"
-	}, function(ret) {
-			var result = ret.result;
-			if (result == 'success') {
-				self.normalpickData = ret.data;
-			}
-	f})
+    items: [1, 2, 3, 4],
+    height: "500px"
+  }, function(ret) {
+      var result = ret.result;
+      if (result == 'success') {
+        self.normalpickData = ret.data;
+    }
+  })
 ```
 
 ## 概述
