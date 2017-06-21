@@ -23,33 +23,33 @@ weex-picker仅支持weex的web端的picker功能，如无需picker功能，无�
 
 - 步骤 1
 ```
-  npm install  weex-picker --save-dev
+  npm install  @weex-project/weex-picker --save-dev
 ```
 - 步骤 2
   
-  你需要在引入`weex-vue-render`之后进行模块注册，具体可参考根目录下的`./playground/browser/plugininstall.js`
+  ~~你需要在引入`weex-vue-render`之后进行模块注册，具体可参考根目录下的`./playground/browser/plugininstall.js`~~
 
-```javascript
-  let picker = require('weex-picker');
-  if (window.Weex) {
-    Weex.install(picker);
-  } else if (window.weex) {
-    weex.install(picker);
-  }
+  目前模块的注册加入了源码中，请保证在weex环境加载之后引入
+
+```html
+  <script src="../../../node_modules/vue/dist/vue.runtime.js"></script>
+  <script src="../../../node_modules/weex-vue-render/dist/index.js"></script>
+  <script src="../../../node_modules/@weex-project/weex-picker/build/index.js"></script>
 ```
+
 - 步骤 3
 
 ```javascript
   const picker = weex.requireModule('picker');
   picker.pick({
-			items: [1, 2, 3, 4],
-			height: "500px"
-	}, function(ret) {
-			var result = ret.result;
-			if (result == 'success') {
-				self.normalpickData = ret.data;
-			}
-	f})
+    items: [1, 2, 3, 4],
+    height: "500px"
+  }, function(ret) {
+      var result = ret.result;
+      if (result == 'success') {
+        self.normalpickData = ret.data;
+    }
+  })
 ```
 
 ## 概述
