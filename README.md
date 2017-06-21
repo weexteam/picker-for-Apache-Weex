@@ -11,7 +11,7 @@ weex-picker仅支持weex的web端的picker功能，如无需picker功能，无�
 
 - 编译例子
 ```
-  npm run build:examples:web
+  npm run build:examples
 ```
 - 启动调试服务器
 ```
