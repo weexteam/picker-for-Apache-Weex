@@ -52,7 +52,7 @@
         "dev": "webpack --watch --config build/webpack.config.js",
         "build": "webpack --config build/webpack.config.js",
         "dev:examples": "webpack --watch --config build/webpack.examples.js",
-        "build:examples": "webpack --config build/webpack.examples.config.js",
+        "build:examples": "webpack --config build/webpack.examples.js",
         "copy:examples": "rm -rf .examples/android/app/src/main/assets/* && cp -vrf ./examples/build/* ./android/app/src/main/assets/ &&rm -rf .examples/ios/bundlejs/* && cp -vrf ./examples/build/* .examples/ios/bundles/",
         "lint": "eslint html5",
         "serve": "serve ./ -p 12580"
