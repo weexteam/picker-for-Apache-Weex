@@ -34,7 +34,7 @@ weex-picker仅支持weex的web端的picker功能，如无需picker功能，无�
 ```html
   <script src="../../../node_modules/vue/dist/vue.runtime.js"></script>
   <script src="../../../node_modules/weex-vue-render/dist/index.js"></script>
-  <script src="../../../node_modules/@weex-project/weex-picker/build/index.js"></script>
+  <script src="../../../node_modules/@weex-project/weex-picker/js/build/index.js"></script>
 ```
 
 - 步骤 3
