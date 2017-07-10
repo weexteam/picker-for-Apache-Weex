@@ -131,6 +131,7 @@
 .weex-picker-body ul{
     display: block;
     width: 100%;
+    list-style: none;
 }
 
 .weex-picker-body li {
