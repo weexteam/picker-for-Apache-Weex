@@ -15,6 +15,7 @@
 
 <script>
 	const picker = weex.requireModule('picker');
+	console.log(1111221)
 	module.exports = {
 		data: {
 			normalpickData:'',
@@ -25,8 +26,8 @@
 			normalpick: function() {
 				var self = this;
 				picker.pick({
+					height: '500px',
 					items: [1, 2, 3, 4],
-					height: "500px"
 				}, function(ret) {
 					var result = ret.result;
 					if (result == 'success') {
@@ -38,9 +39,6 @@
 			pickDate: function(e) {
 				var self = this;
 				picker.pickDate({
-					// 'type':'time',
-					// 'value':'04:50',
-					// 'type':'date',
 					'value': '2016-12-20',
 					'max': '2016-12-30',
 					'min': '2014-12-30',
@@ -55,7 +53,6 @@
 				var self = this;
 				picker.pickTime({
 				}, function(ret) {
-					console.log(ret)
 					var result = ret.result;
 					if (result == 'success') {
 						self.pickTimeData = ret.data;
