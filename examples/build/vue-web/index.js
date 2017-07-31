@@ -516,7 +516,6 @@
 	//
 
 	var picker = weex.requireModule('picker');
-	console.log(1111221);
 	module.exports = {
 		data: {
 			normalpickData: '',

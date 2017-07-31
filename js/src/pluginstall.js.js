@@ -157,10 +157,9 @@
 
 	var pickerModule = {
 	  pick: function pick(options, confirmCallback, cancelCallback) {
-	    var items = options.items;
-	    var index = options.index;
-	    options.data = items;
-	    options.defaultIndexs = index;
+	    options.height = weex && weex.config.env.scale && options.height ? +options.height.replace('px', '') / weex.config.env.scale : options.height;
+	    options.data = options.items;
+	    options.defaultIndexs = options.index;
 	    options.confirmCallback = confirmCallback;
 	    options.cancelCallback = cancelCallback;
 	    options.sender = this.sender;
@@ -228,6 +227,7 @@
 	    document.body.appendChild(mask);
 	  },
 	  pickTime: function pickTime(options, confirmCallback) {
+	    options.height = weex && weex.config.env.scale && options.height ? +options.height.replace('px', '') / weex.config.env.scale : options.height;
 	    options.value = options.value;
 	    options.confirmCallback = confirmCallback;
 	    options.sender = this.sender;
@@ -292,13 +292,13 @@
 	  this.itemScrolls = [];
 	  this.formateResult = configs.formateResult;
 	  this.resultIndexs = configs.defaultIndexs || this._getDefaultIndex();
-	  this.cancelTitle = configs.cancelTitle || "取消";
-	  this.confirmTitle = configs.confirmTitle || "确认";
-	  this.cancelTitleColor = configs.cancelTitleColor || "#333";
-	  this.confirmTitleColor = configs.confirmTitleColor || "#0074d9";
-	  this.height = configs.height || pickerBody && pickerBody.style.height || "450";
-	  this.textColor = configs.textColor || "#333";
-	  this.selectionColor = configs.selectionColor || "darkred";
+	  this.cancelTitle = configs.cancelTitle || '取消';
+	  this.confirmTitle = configs.confirmTitle || '确认';
+	  this.cancelTitleColor = configs.cancelTitleColor || '#333';
+	  this.confirmTitleColor = configs.confirmTitleColor || '#0074d9';
+	  this.height = configs.height || pickerBody && pickerBody.style.height || '450';
+	  this.textColor = configs.textColor || '#333';
+	  this.selectionColor = configs.selectionColor || 'darkred';
 	  this.configs = configs;
 	  this._init();
 	}
@@ -338,10 +338,10 @@
 	    pickerCancel.innerText = this.cancelTitle;
 	    pickerCancel.style.color = this.cancelTitleColor;
 	    pickerConfirm.style.color = this.confirmTitleColor;
-	    pickerBody.style.height = this.height;
-	    pickerBar.style.height = parseFloat(this.height) / 5 + "px";
-	    pickerBar.style.bottom = parseFloat(this.height) / 5 * 2 + "px";
-	    pickerBar.style.top = "auto";
+	    pickerBody.style.height = this.height + 'px';
+	    pickerBar.style.height = parseFloat(this.height) / 5 + 'px';
+	    pickerBar.style.bottom = parseFloat(this.height) / 5 * 2 + 'px';
+	    pickerBar.style.top = 'auto';
 	    pickerHeader.appendChild(pickerCancel);
 	    pickerHeader.appendChild(pickerConfirm);
 	  },
@@ -414,12 +414,12 @@
 	      } else {
 	        cell.innerText = items[i];
 	      }
-	      cell.style.height = parseFloat(this.height) / 5 + "px";
-	      cell.style.lineHeight = parseFloat(this.height) / 5 + "px";
+	      cell.style.height = parseFloat(this.height) / 5 + 'px';
+	      cell.style.lineHeight = parseFloat(this.height) / 5 + 'px';
 	      ui.appendChild(cell);
 	    }
 	    pickerScroller.className = 'weex-picker-scroller';
-	    pickerScroller.style.height = this.height;
+	    pickerScroller.style.height = this.height + 'px';
 	    pickerScroller.style.color = this.textColor;
 	    pickerScroller.appendChild(ui);
 	    pickerBody.appendChild(pickerScroller);
@@ -483,7 +483,7 @@
 	    for (var i = 0; i < alllist.length; i++) {
 	      if (alllist[i].className === 'active') {
 	        alllist[i].className = '';
-	        alllist[i].style.color = "";
+	        alllist[i].style.color = '';
 	      }
 	    }
 	  },
