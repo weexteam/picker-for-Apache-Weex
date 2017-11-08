@@ -19,9 +19,9 @@ const pickerModule = {
     const i18n = {
         previousMonth: 'Previous Month',
         nextMonth: 'Next Month',
-        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-        weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+	    months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+	    weekdays: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+	    weekdaysShort: ['日', '一', '二', '三', '四', '五', '六']
     }
     
     //options see https://github.com/dbushell/Pikaday#configuration.
